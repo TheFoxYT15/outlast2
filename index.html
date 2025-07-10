@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYR I VIBE | Outlast</title>
+    <style>
+        :root {
+            --neon-blue: #00f0ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --card-bg: rgba(15, 15, 35, 0.8);
+            --text-light: #f0f0f0;
+            --text-muted: #b0b0b0;
+            --neon-purple: #9d00ff;
+            --neon-yellow: #fff000;
+            --neon-red: #ff0000;
+            --text-red: #ff0040;
+            --neon-orange: #ff9900;
+            --text-orange: #ffa500;
+            --text-yellow: #ffff00;
+            --text-green: #90ee90;
+            --neon-green: #35d420;
+            --neon-drkbl: #3c00ff;
+            --text-drkbl: #00ffc8;
+            --text-blue: #0fd3d6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
+        }
+
+        /* تأثيرات الجسيمات الخلفية */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0, 240, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* تصميم الصفحة */
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            z-index: 100;
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.3);
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 240, 252, 0.2);
+            transform: translateX(-5px);
+            box-shadow: 0 0 20px rgba(0, 240, 252, 0.5);
+        }
+
+        .game-header {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .game-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 100px var(--neon-blue),
+                         0 0 200px var(--neon-pink),
+                         0 0 30px rgba(255, 0, 255, 0.5);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            padding: 0 15px;
+        }
+
+        .game-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            border-radius: 3px;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* تأثيرات نيون للأيقونات مع ألوان مختلفة */
+        .meta-item:nth-child(1) i { /* أيقونة التحميل */
+            color: var(--text-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        .meta-item:nth-child(2) i { /* أيقونة التاريخ */
+            color: var(--text-orange);
+            text-shadow: 0 0 10px var(--neon-orange);
+        }
+        .meta-item:nth-child(3) i { /* أيقونة النجمة */
+            color: var(--text-yellow);
+            text-shadow: 0 0 10px var(--neon-yellow);
+        }
+        .meta-item:nth-child(4) i { /* أيقونة النوع */
+            color: var(--text-red);
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        /* معرض الصور */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid rgba(0, 240, 252, 0.3);
+            transition: opacity 0.5s ease;
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .thumbnail {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            border-color: var(--neon-blue);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* محتوى اللعبة */
+        .game-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .game-description {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 240, 252, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* نيون بنفسجي لوصف اللعبة مع نص برتقالي */
+        .game-description h2:first-child {
+            color: var(--text-red);
+            text-shadow: 0 0 15px var(--neon-purple);
+        }
+
+        .game-description h2:first-child i {
+            color: var(--text-red);
+            text-shadow: 0 0 15px var(--neon-purple);
+        }
+
+        .game-description p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style-type: none;
+        }
+
+        /* نيون أصفر لمميزات اللعبة مع نص أبيض */
+        .features-list li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-right: 2rem;
+            color: var(--text-light);
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--text-yellow);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-yellow);
+        }
+
+        /* الشريط الجانبي */
+        .game-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .specs-card, .download-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 240, 252, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* نيون أخضر كاشف لتحميل اللعبة مع نص فاتح */
+        .download-card h2 {
+            color: var(--text-green);
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .download-card h2 i {
+            color: var(--text-light);
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .specs-card h2 {
+            color: var(--text-light);
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        .specs-list {
+            list-style-type: none;
+        }
+
+        .specs-list li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .specs-list strong {
+            color: var(--neon-blue);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 240, 252, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 240, 252, 0.6);
+        }
+
+        .platform-tags {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-tag {
+            background: rgba(0, 240, 252, 0.2);
+            color: var(--neon-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--neon-blue);
+        }
+
+        /* قسم الفيديو */
+        .video-section {
+            margin: 3rem 0;
+        }
+
+        .video-section h2 {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-shadow: 0 0 8px var(--neon-pink);
+        }
+
+        .video-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid rgba(0, 240, 252, 0.3);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* إعلانات */
+        .ad-container {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(0, 240, 252, 0.2);
+        }
+
+        .sidebar-ad {
+            margin: 1rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(0, 240, 252, 0.2);
+        }
+
+        .sticky-ad {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid rgba(0, 240, 252, 0.3);
+        }
+
+        /* التكيف مع الشاشات الصغيرة */
+        @media (max-width: 992px) {
+            .game-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-image {
+                height: 500px;
+            }
+            
+            .video-container {
+                height: 400px;
+            }
+
+            .sticky-ad {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .main-image {
+                height: 400px;
+            }
+            
+            .video-container {
+                height: 350px;
+            }
+            
+            .game-meta {
+                gap: 1.5rem;
+            }
+            
+            .back-btn {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .thumbnail {
+                width: 120px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .game-header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-image {
+                height: 300px;
+            }
+            
+            .video-container {
+                height: 250px;
+            }
+            
+            .game-meta {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .game-description, .specs-card, .download-card {
+                padding: 1.5rem;
+            }
+            
+            .thumbnail {
+                width: 100px;
+                height: 70px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- جسيمات خلفية متحركة -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="game-container">
+        <button class="back-btn" onclick="window.history.back()">
+            <i class="fas fa-arrow-right"></i> العودة
+        </button>
+        
+        <!-- إعلان رئيسي في الأعلى -->
+        <div class="ad-container">
+            <script type="text/javascript">
+                atOptions = {
+                    'key': '8de1ef727e7204ead14d9368be30693c',
+                    'format': 'iframe',
+                    'height': 90,
+                    'width': 728,
+                    'params': {}
+                };
+            </script>
+            <script type="text/javascript" src="//rightyclasp.com/8de1ef727e7204ead14d9368be30693c/invoke.js"></script>
+        </div>
+        
+        <header class="game-header">
+            <h1><i class="fas fa-gamepad"></i> Outlast</h1>
+            <div class="game-meta">
+                <div class="meta-item">
+                    <i class="fas fa-download"></i>
+                    <span>الحجم: 12.83GB</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>سنة الإصدار: 2017</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-star"></i>
+                    <span>التقييم: 8/10</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-tag"></i>
+                    <span>الفئة: رعب | تختيم | استكشاف</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- معرض الصور -->
+        <div class="gallery-container">
+            <img src="https://a.top4top.io/p_3408ia7y61.jpg" alt="Outlast 2 Screenshot" class="main-image" id="mainImage">
+            <div class="thumbnails">
+                <img src="https://a.top4top.io/p_3408ia7y61.jpg" alt="Outlast 2 Thumbnail 1" class="thumbnail active" onclick="changeImage(this)">
+                <img src="https://l.top4top.io/p_3456don7o4.jpg" alt="Outlast 2 Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
+                <img src="https://k.top4top.io/p_3456ki00b1.jpg" alt="Outlast 2 Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                <img src="https://c.top4top.io/p_3475t4q4s1.png" alt="Outlast 2 Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
+            </div>
+        </div>
+        
+        <!-- محتوى اللعبة -->
+        <div class="game-content">
+            <div class="game-description">
+                <h2><i class="fas fa-info-circle"></i> وصف اللعبة</h2>
+                <p>
+                   Outlast 2 هي لعبة رعب بقاء من منظور الشخص الأول، تقوم بدور بليك لانغيرمان، صحفي يحقق في قتل امرأة حامل في المناطق النائية من أريزونا. بعد تحطم طائرته، يجب على بليك أن يجد زوجته بينما يهرب من طائفة دينية متعصبة.
+تتميز اللعبة بأجواء مرعبة وإضاءة ديناميكية وصوتيات مذهلة تزيد من حدة التوتر. يجب على اللاعب الاعتماد على مهارات التخفي والهروب حيث لا توجد وسيلة للدفاع عن النفس.
+                </p>
+                <p>
+                    تتميز اللعبة بأجواء مرعبة وإضاءة ديناميكية وصوتيات مذهلة تزيد من حدة التوتر. يجب على اللاعب الاعتماد على مهارات التخفي والهروب حيث لا توجد وسيلة للدفاع عن النفس.
+                </p>
+                
+                <h2><i class="fas fa-bolt"></i> مميزات اللعبة</h2>
+                <ul class="features-list">
+                    <li>قصة غامضة ومثيرة مع نهايات متعددة</li>
+                    <li>رسومات عالية الجودة مع تأثيرات إضاءة واقعية</li>
+                    <li>نظام صوتي متطور يزيد من حدة الرعب</li>
+                    <li>عالم مفتوح جزئياً مع مسارات متعددة</li>
+                    <li>أعداء أذكياء مع سلوكيات متغيرة</li>
+                </ul>
+
+                <!-- إعلان في منتصف المحتوى -->
+                <div class="ad-container" style="margin: 2rem auto;">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key': '2dc11e023b2bef698eefcf0cc984bc2b',
+                            'format': 'iframe',
+                            'height': 250,
+                            'width': 300,
+                            'params': {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//rightyclasp.com/2dc11e023b2bef698eefcf0cc984bc2b/invoke.js"></script>
+                </div>
+            </div>
+            
+            <div class="game-sidebar">
+                <!-- إعلان في الشريط الجانبي -->
+                <div class="sidebar-ad">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key': '60243a8f88efa823fae79d811e2e8eac',
+                            'format': 'iframe',
+                            'height': 600,
+                            'width': 160,
+                            'params': {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//rightyclasp.com/60243a8f88efa823fae79d811e2e8eac/invoke.js"></script>
+                </div>
+
+                <div class="specs-card">
+                    <h2><i class="fas fa-laptop"></i> متطلبات التشغيل</h2>
+                    <ul class="specs-list">
+                        <li>
+                            <strong>الحد الأدنى:</strong>
+                            <span>Windows 7/8/10 64-bit, Intel Core i5-2400, 8GB RAM, NVIDIA GTX 660 2GB</span>
+                        </li>
+                        <li>
+                            <strong>المستحسن:</strong>
+                            <span>Windows 10 64-bit, Intel Core i7-3770, 8GB RAM, NVIDIA GTX 970 4GB</span>
+                        </li>
+                        <li>
+                            <strong>مساحة التخزين:</strong>
+                            <span>30GB مساحة خالية</span>
+                        </li>
+                        <li>
+                            <strong>الإصدار:</strong>
+                            <span>كاملة+DLC</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="download-card">
+                    <h2><i class="fas fa-download"></i> تحميل اللعبة</h2>
+                    <p>الميزات:</p>
+                    
+                    <div class="platform-tags">
+                        <span class="platform-tag">كاملة</span>
+                        <span class="platform-tag">PC</span>
+                        <span class="platform-tag">متعددة اللغات</span>
+                    </div>
+                    
+                    <a href="https://www.mediafire.com/file/mug8p9mobijflle/OutlastWhistleblowerDLC%255Bfoxy15studio%255D.zip/file" class="download-btn" oneclick="_blank">
+                        <i class="fas fa-download"></i> تحميل الآن (12.83GB)
+                    </a>
+                    
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                        <i class="fas fa-shield-alt"></i> ملف مفحوص وخالي من الفيروسات
+                    </p>
+                </div>
+
+                <!-- إعلان آخر في الشريط الجانبي -->
+                <div class="sidebar-ad">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key': '91f706eaabe81b9ceb4dbb7f2d78ef1a',
+                            'format': 'iframe',
+                            'height': 1000,
+                            'width': 1068,
+                            'params': {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//rightyclasp.com/91f706eaabe81b9ceb4dbb7f2d78ef1a/invoke.js"></script>
+                </div>
+            </div>
+        </div>
+        
+        <!-- إعلان قبل قسم الفيديو -->
+        <div class="ad-container">
+            <script async="async" data-cfasync="false" src="//rightyclasp.com/96d90770afed376d1d57ba4ff411b1df/invoke.js"></script>
+<div id="container-96d90770afed376d1d57ba4ff411b1df"></div>
+        </div>
+
+        <!-- قسم الفيديو -->
+        <div class="video-section">
+            <h2><i class="fas fa-video"></i> فيديو عن اللعبة</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/3WzCeOp7eJ8?si=w-vb3QjyrWIhOBx7" title="Outlast 2 Gameplay" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- إعلان عائم في الأسفل -->
+    <div class="sticky-ad">
+        <script type='text/javascript' src='//rightyclasp.com/8f/19/35/8f1935399ce8134c3666014bde7f01b5.js'></script>
+    </div>
+
+    <!-- النصوص البرمجية الإضافية -->
+    <script type='text/javascript' src='//rightyclasp.com/c4/8a/0c/c48a0c08645cd3da80326f7ba476902a.js'></script>
+
+    <script>
+        // تغيير الصورة الرئيسية مع تأثير التلاشي
+        function changeImage(thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            thumbnail.classList.add('active');
+            
+            mainImage.style.opacity = 0;
+            setTimeout(() => {
+                mainImage.src = thumbnail.src;
+                mainImage.style.opacity = 1;
+            }, 300);
+        }
+        
+        // إنشاء جسيمات خلفية متحركة
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100 + 100;
+                const duration = Math.random() * 15 + 10;
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.3 + 0.1;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.opacity = opacity;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>
