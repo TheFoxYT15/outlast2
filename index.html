@@ -175,7 +175,7 @@
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-.nav-menu ul li:nth-child(3) a { /* Tools */
+        .nav-menu ul li:nth-child(3) a { /* Tools */
             color: var(--neon-blue);
             border-color: rgba(0, 240, 255, 0.3);
         }
@@ -185,7 +185,7 @@
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-.nav-menu ul li:nth-child(4) a { /* Games_Apps_Tools */
+        .nav-menu ul li:nth-child(4) a { /* Games_Apps_Tools */
             color: var(--neon-yellow);
             border-color: rgba(0, 240, 255, 0.3);
         }
@@ -195,7 +195,7 @@
             text-shadow: 0 0 10px var(--neon-yellow);
         }
 
-.nav-menu ul li:nth-child(5) a { /* Mini Games */
+        .nav-menu ul li:nth-child(5) a { /* Mini Games */
             color: var(--neon-purple);
             border-color: rgba(0, 240, 255, 0.3);
         }
@@ -250,7 +250,6 @@
             border-color: currentColor;
         }
 
-        /* باقي الأنماط الأصلية للصفحة */
         body {
             background: var(--dark-bg);
             color: var(--text-light);
@@ -609,47 +608,6 @@
             border: none;
         }
 
-        /* إعلانات */
-        .ad-container {
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            border: 1px solid rgba(0, 240, 252, 0.2);
-        }
-
-        .sidebar-ad {
-            margin: 1rem 0;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            border: 1px solid rgba(0, 240, 252, 0.2);
-        }
-
-        .sticky-ad {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid rgba(0, 240, 252, 0.3);
-        }
-
-        /* حقوق النشر */
-        .copyright {
-            text-align: center;
-            padding: 20px;
-            color: white;
-            background: rgba(0, 0, 0, 0.5);
-            margin-top: 20px;
-            font-size: 0.9rem;
-            direction: ltr;
-        }
-
         /* التكيف مع الشاشات الصغيرة */
         @media (max-width: 992px) {
             .game-content {
@@ -662,10 +620,6 @@
             
             .video-container {
                 height: 400px;
-            }
-
-            .sticky-ad {
-                display: none;
             }
         }
 
@@ -772,20 +726,6 @@
             <i class="fas fa-arrow-right"></i> العودة
         </button>
         
-        <!-- إعلان رئيسي في الأعلى -->
-        <div class="ad-container">
-            <script type="text/javascript">
-                atOptions = {
-                    'key': '8de1ef727e7204ead14d9368be30693c',
-                    'format': 'iframe',
-                    'height': 90,
-                    'width': 728,
-                    'params': {}
-                };
-            </script>
-            <script type="text/javascript" src="//rightyclasp.com/8de1ef727e7204ead14d9368be30693c/invoke.js"></script>
-        </div>
-        
         <header class="game-header">
             <h1><i class="fas fa-gamepad"></i> Outlast 2</h1>
             <div class="game-meta">
@@ -803,7 +743,7 @@
                 </div>
                 <div class="meta-item">
                     <i class="fas fa-tag"></i>
-                    <span>الفئة: رعب | تختيم | استكشاف</span>
+                    <span>النوع: رعب/بقاء</span>
                 </div>
             </div>
         </header>
@@ -824,8 +764,7 @@
             <div class="game-description">
                 <h2><i class="fas fa-info-circle"></i> وصف اللعبة</h2>
                 <p>
-                   Outlast 2 هي لعبة رعب بقاء من منظور الشخص الأول، تقوم بدور بليك لانغيرمان، صحفي يحقق في قتل امرأة حامل في المناطق النائية من أريزونا. بعد تحطم طائرته، يجب على بليك أن يجد زوجته بينما يهرب من طائفة دينية متعصبة.
-تتميز اللعبة بأجواء مرعبة وإضاءة ديناميكية وصوتيات مذهلة تزيد من حدة التوتر. يجب على اللاعب الاعتماد على مهارات التخفي والهروب حيث لا توجد وسيلة للدفاع عن النفس.
+                    Outlast 2 هي لعبة رعب بقاء من منظور الشخص الأول، تقوم بدور بليك لانغيرمان، صحفي يحقق في قتل امرأة حامل في المناطق النائية من أريزونا. بعد تحطم طائرته، يجب على بليك أن يجد زوجته بينما يهرب من طائفة دينية متعصبة.
                 </p>
                 <p>
                     تتميز اللعبة بأجواء مرعبة وإضاءة ديناميكية وصوتيات مذهلة تزيد من حدة التوتر. يجب على اللاعب الاعتماد على مهارات التخفي والهروب حيث لا توجد وسيلة للدفاع عن النفس.
@@ -839,37 +778,9 @@
                     <li>عالم مفتوح جزئياً مع مسارات متعددة</li>
                     <li>أعداء أذكياء مع سلوكيات متغيرة</li>
                 </ul>
-
-                <!-- إعلان في منتصف المحتوى -->
-                <div class="ad-container" style="margin: 2rem auto;">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key': '2dc11e023b2bef698eefcf0cc984bc2b',
-                            'format': 'iframe',
-                            'height': 250,
-                            'width': 300,
-                            'params': {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//rightyclasp.com/2dc11e023b2bef698eefcf0cc984bc2b/invoke.js"></script>
-                </div>
             </div>
             
             <div class="game-sidebar">
-                <!-- إعلان في الشريط الجانبي -->
-                <div class="sidebar-ad">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key': '60243a8f88efa823fae79d811e2e8eac',
-                            'format': 'iframe',
-                            'height': 600,
-                            'width': 160,
-                            'params': {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//rightyclasp.com/60243a8f88efa823fae79d811e2e8eac/invoke.js"></script>
-                </div>
-
                 <div class="specs-card">
                     <h2><i class="fas fa-laptop"></i> متطلبات التشغيل</h2>
                     <ul class="specs-list">
@@ -887,7 +798,7 @@
                         </li>
                         <li>
                             <strong>الإصدار:</strong>
-                            <span>كاملة+DLC</span>
+                            <span>V1.0 كاملة</span>
                         </li>
                     </ul>
                 </div>
@@ -899,10 +810,10 @@
                     <div class="platform-tags">
                         <span class="platform-tag">كاملة</span>
                         <span class="platform-tag">PC</span>
-                        <span class="platform-tag">متعددة اللغات</span>
+                        <span class="platform-tag">متعددة اللغات قريبا...</span>
                     </div>
                     
-                    <a href="https://drive.google.com/file/d/1g5mtjPRn5oEkDTfXf3teinix7InygBqT/view?usp=drive_link" class="download-btn" oneclick="_blank">
+                    <a href="https://drive.google.com/file/d/1g5mtjPRn5oEkDTfXf3teinix7InygBqT/view?usp=drive_link" class="download-btn" target="_blank">
                         <i class="fas fa-download"></i> تحميل الآن (12.83GB)
                     </a>
                     
@@ -910,51 +821,17 @@
                         <i class="fas fa-shield-alt"></i> ملف مفحوص وخالي من الفيروسات
                     </p>
                 </div>
-
-                <!-- إعلان آخر في الشريط الجانبي -->
-                <div class="sidebar-ad">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key': '91f706eaabe81b9ceb4dbb7f2d78ef1a',
-                            'format': 'iframe',
-                            'height': 1000,
-                            'width': 1068,
-                            'params': {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//rightyclasp.com/91f706eaabe81b9ceb4dbb7f2d78ef1a/invoke.js"></script>
-                </div>
             </div>
         </div>
         
-        <!-- إعلان قبل قسم الفيديو -->
-        <div class="ad-container">
-            <script async="async" data-cfasync="false" src="//rightyclasp.com/96d90770afed376d1d57ba4ff411b1df/invoke.js"></script>
-<div id="container-96d90770afed376d1d57ba4ff411b1df"></div>
-        </div>
 
-        <!-- قسم الفيديو -->
         <div class="video-section">
             <h2><i class="fas fa-video"></i> فيديو عن اللعبة</h2>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/3WzCeOp7eJ8?si=w-vb3QjyrWIhOBx7" title="Outlast 2 Gameplay" allowfullscreen></iframe>
             </div>
         </div>
-
-        <!-- حقوق النشر -->
-        <footer class="copyright">
-            <div class="copyright">
-  <img src="https://c.top4top.io/p_34821v3zm1.png" alt="Logo" style="width: 100px; height: 100px; vertical-align: middle; margin-left: 6px;">
-  جميع الحقوق محفوظة &copy; 2025 لفريق عمل SYR I VIBE
-        </footer>
-
-    <!-- إعلان عائم في الأسفل -->
-    <div class="sticky-ad">
-        <script type='text/javascript' src='//rightyclasp.com/8f/19/35/8f1935399ce8134c3666014bde7f01b5.js'></script>
     </div>
-
-    <!-- النصوص البرمجية الإضافية -->
-    <script type='text/javascript' src='//rightyclasp.com/c4/8a/0c/c48a0c08645cd3da80326f7ba476902a.js'></script>
 
     <script>
         // تغيير الصورة الرئيسية مع تأثير التلاشي
